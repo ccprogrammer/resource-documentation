@@ -328,7 +328,7 @@ function renderMarkdown(src){
 }
 function inlineMd(s){ s=esc(s); s=s.replace(/`([^`]+)`/g,'<code>$1</code>'); s=s.replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>'); s=s.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>'); s=s.replace(/(^|[^*])\*([^*]+)\*/g,'$1<em>$2</em>'); return s; }
 function highlight(code){
-  let h=esc(code); const ph=[]; const stash=(c,t)=>{ph.push('<span class="'+c+'">'+t+'</span>');return '\u0000'+(ph.length-1)+'\u0000';};
+  let h=esc(code); const ph=[]; const stash=(c,t)=>{ph.push('<span class="'+c+'">'+t+'</span>');return '\u0000z'+(ph.length-1)+'\u0000';};
   h=h.replace(/(\/\/[^\n]*)/g,m=>stash('tok-cm',m));
   h=h.replace(/(&#39;|&quot;|')(?:[^&\n])*?\1/g,m=>stash('tok-st',m));
   h=h.replace(/\b(class|extends|final|var|void|async|await|return|if|else|for|while|try|catch|on|throw|new|const|import|in|yield|super|this|true|false|null)\b/g,m=>stash('tok-kw',m));
@@ -336,7 +336,7 @@ function highlight(code){
   h=h.replace(/\b([A-Z]\w*)\b/g,m=>stash('tok-ty',m));
   h=h.replace(/\b(\d+(?:\.\d+)?)\b/g,m=>stash('tok-nu',m));
   h=h.replace(/\b([a-z_]\w*)(?=\s*\()/g,m=>stash('tok-fn',m));
-  h=h.replace(/\u0000(\d+)\u0000/g,(_,i)=>ph[+i]); return h;
+  h=h.replace(/\u0000z(\d+)\u0000/g,(_,i)=>ph[+i]); return h;
 }
 
 /* ---------- nav ---------- */
